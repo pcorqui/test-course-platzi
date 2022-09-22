@@ -1,7 +1,8 @@
-package com.platzi.javatests.util;
+package com.platzi.javatests;
 
 //import static org.junit.jupiter.api.Assertions.*;
 
+import com.platzi.javatests.utill.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class StringUtilTest {
     //cada test debe tener una sola comprobaion y se pueden correr independiente
     @Test
     public void testRepeat(){
-        Assert.assertEquals("HolaHolaHola",StringUtil.repeat("Hola",3));
+        Assert.assertEquals("HolaHolaHola", StringUtil.repeat("Hola",3));
         Assert.assertEquals("Hola",StringUtil.repeat("Hola",1));
     }
 

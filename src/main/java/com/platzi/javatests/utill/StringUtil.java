@@ -1,4 +1,4 @@
-package com.platzi.javatests;
+package com.platzi.javatests.utill;
 
 public class StringUtil {
     public static String repeat(String str, int times){
