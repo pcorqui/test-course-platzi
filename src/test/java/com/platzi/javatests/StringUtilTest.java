@@ -6,6 +6,9 @@ import com.platzi.javatests.utill.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 //La clase debe ser public
 public class StringUtilTest {
     //en los test no se utiliza main si no una clase llamada test
@@ -53,5 +56,25 @@ public class StringUtilTest {
     @Test(expected = IllegalArgumentException.class)
     public void test_repeat_negative_times(){
         StringUtil.repeat("",-1);
+    }
+
+    @Test
+    public void test_string_is_not_empty(){
+        assertFalse(StringUtil.isEmpty("Paul"));
+    }
+
+    @Test
+    public void empty_quote_is_string_empty(){
+        assertTrue(StringUtil.isEmpty(""));
+    }
+
+    @Test
+    public void null_is_string_empty(){
+        assertTrue(StringUtil.isEmpty(null));
+    }
+
+    @Test
+    public void string_space_is_string_empty(){
+        assertTrue(StringUtil.isEmpty(" "));
     }
 }

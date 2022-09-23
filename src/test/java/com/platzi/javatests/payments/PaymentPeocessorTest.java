@@ -1,11 +1,20 @@
 package com.platzi.javatests.payments;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 
 public class PaymentPeocessorTest {
+
+    private PaymentGateway paymentGateway;
+    private PaymentPeocessor paymentPeocessor;
+    @Before
+    public void setup(){
+        paymentGateway = Mockito.mock(PaymentGateway.class);
+        paymentPeocessor = new PaymentPeocessor(paymentGateway);
+    }
 
     @Test
     public void payment_is_correct(){
