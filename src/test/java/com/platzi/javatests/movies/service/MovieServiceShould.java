@@ -4,6 +4,7 @@ import com.platzi.javatests.movies.data.MovieRepository;
 import com.platzi.javatests.movies.model.Genre;
 import com.platzi.javatests.movies.model.Movie;
 import org.hamcrest.CoreMatchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -17,13 +18,13 @@ import static org.junit.Assert.*;
 
 public class MovieServiceShould {
 
+    MovieRepository movieRepository;
+    MovieService movieService;
 
-    @Test
-    public void return_movie_by_genre() {
-        //se hace un mockito de movie repository por el momento no es necesario crearla
-        //como apenas estoy creando el repository no es necesario generar su conexcion a DB
-        MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
-
+    //everything that go to setup before each test
+    @Before
+    public void setUp() throws Exception {
+        movieRepository = Mockito.mock(MovieRepository.class);
         Mockito.when(movieRepository.findAll()).thenReturn(
                 Arrays.asList(
                         new Movie(1,"Dark Knight",152, Genre.ACTION),
@@ -35,12 +36,29 @@ public class MovieServiceShould {
                         new Movie(7,"Matrix",136, Genre.ACTION)
                 )
         );
-        MovieService movieService  = new MovieService(movieRepository);
+        movieService  = new MovieService(movieRepository);
+    }
+
+    @Test
+    public void return_movie_by_genre() {
+        //se hace un mockito de movie repository por el momento no es necesario crearla
+        //como apenas estoy creando el repository no es necesario generar su conexcion a DB
+        //MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
+
+        //MovieService movieService  = new MovieService(movieRepository);
         Collection<Movie> movies = movieService.findMoviesByGenre(Genre.COMEDY);
 
         List<Integer> moviesId = movies.stream().map(movie -> movie.getId()).collect(Collectors.toList());
 
         assertThat(moviesId, CoreMatchers.is(Arrays.asList(3,6)));
 
+    }
+
+    @Test
+    public void return_movies_by_length(){
+         Collection<Movie> movies = movieService.findMoviesByLengt(120);
+         List<Integer> moviesId = movies.stream().map(movie -> movie.getId()).collect(Collectors.toList());
+
+         assertThat(moviesId, CoreMatchers.is(Arrays.asList(2,3,4,5,6)));
     }
 }
